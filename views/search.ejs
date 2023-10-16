@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+
+<body class="grey-bg">
+    <%- include('nav.ejs') %>
+    <input class="search">
+    <button class="search-send">검색</button>
+
+    <script>
+
+        document.querySelector('.search-send').addEventListener('click', 
+        function(){
+            let 입력한거 = document.querySelector('.search').value
+            location.href = '/search?val=' + 입력한거
+        })
+
+    </script>
+
+    <h4>검색결과</h4>
+
+    <div class="white-bg">
+        <% for(let i = 0; i<글목록.length; i++){ %>
+            <div class="list-box">
+                <h4>
+                    <a href="/detail/<%=글목록[i]._id%>"><%= 글목록[i].title%></a>
+                    <a href="/edit/<%=글목록[i]._id%>">✏️</a>
+                    <span class="delete" data-id="<%=글목록[i]._id%>">🗑️</span>
+                </h4>
+                
+                <p><%= 글목록[i].content%></p>
+            </div>
+        <% } %>
+    </div>
+
+
+</body>
+
+</html>
